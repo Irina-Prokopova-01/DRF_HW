@@ -1,6 +1,5 @@
 from django.db import models
 
-from users.models import User
 
 
 class Course(models.Model):
@@ -59,7 +58,7 @@ class Lesson(models.Model):
         blank=True,
     )
     owner = models.ForeignKey(
-        User,
+        'users.User',
         verbose_name="Владелец курса",
         on_delete=models.CASCADE,
         help_text="Введите владельца курса",

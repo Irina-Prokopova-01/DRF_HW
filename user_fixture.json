@@ -1,0 +1,42 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$OTcE4tCzjm1glu7qt0A4M1$rK0ETA8iKva/UI7E3ziSIx82VVbp0L2VDy17iJSkML0=",
+        "last_login": "2024-12-23T10:37:33.748Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-12-23T10:36:32.040Z",
+        "email": "test@yandex.ru",
+        "phone_number": null,
+        "avatar": "",
+        "city": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "12345",
+        "last_login": "2024-12-23T10:39:58Z",
+        "is_superuser": false,
+        "first_name": "Prokopova",
+        "last_name": "Irina",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-23T10:37:52Z",
+        "email": "irina-prokopova.style@yandex.ru",
+        "phone_number": null,
+        "avatar": "",
+        "city": "Истра",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

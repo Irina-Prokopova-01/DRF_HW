@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from Ims.Serializers import CourseSerializer, LessonSerializer
+from Ims.serializers import CourseSerializer, LessonSerializer
 from Ims.models import Course, Lesson
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 

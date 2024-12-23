@@ -1,0 +1,24 @@
+[
+{
+    "model": "Ims.lesson",
+    "pk": 1,
+    "fields": {
+        "title": "Python",
+        "description": "C 0",
+        "preview": "",
+        "course": 2,
+        "owner": 1
+    }
+},
+{
+    "model": "Ims.lesson",
+    "pk": 2,
+    "fields": {
+        "title": "Java",
+        "description": "C 0",
+        "preview": "",
+        "course": 2,
+        "owner": 1
+    }
+}
+]
