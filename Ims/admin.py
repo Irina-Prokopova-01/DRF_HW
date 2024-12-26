@@ -10,11 +10,11 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "title",
-        # "owner",
+        "owner",
     )
     list_filter = (
         "title",
-        # "owner",
+        "owner",
     )
     search_fields = ("id", "title")
 

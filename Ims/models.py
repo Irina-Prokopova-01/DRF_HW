@@ -20,6 +20,14 @@ class Course(models.Model):
         null=True,
         help_text="Загрузите фотографию курса",
     )
+    owner = models.ForeignKey(
+        'users.User',
+        verbose_name="Владелец курса",
+        on_delete=models.SET_NULL,
+        help_text="Введите владельца курса",
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return self.title
@@ -59,9 +67,9 @@ class Lesson(models.Model):
     )
     owner = models.ForeignKey(
         'users.User',
-        verbose_name="Владелец курса",
-        on_delete=models.CASCADE,
-        help_text="Введите владельца курса",
+        verbose_name="Владелец урока",
+        on_delete=models.SET_NULL,
+        help_text="Введите владельца урока",
         null=True,
         blank=True,
     )

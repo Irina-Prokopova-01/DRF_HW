@@ -3,13 +3,6 @@ from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from Ims.models import Course, Lesson
 
 
-class LessonSerializer(ModelSerializer):
-    """Сериализатор урока."""
-    class Meta:
-        model = Lesson
-        fields = "__all__"
-
-
 class CourseSerializer(ModelSerializer):
     """Сериализатор курса."""
 
@@ -22,6 +15,7 @@ class CourseSerializer(ModelSerializer):
             f"{lesson.title} - {lesson.description}"
             for lesson in course.lesson_set.all()
         ]
+
     def get_lessons_total(self, course):
         """Получаем всего уроков в курсе."""
         return course.lesson_set.count()
@@ -29,6 +23,18 @@ class CourseSerializer(ModelSerializer):
     class Meta:
         model = Course
         fields = '__all__'
+
+class LessonSerializer(ModelSerializer):
+    """Сериализатор урока."""
+
+    course = CourseSerializer(read_only=True)
+
+    class Meta:
+        model = Lesson
+        fields = "__all__"
+
+
+
 
 
 
