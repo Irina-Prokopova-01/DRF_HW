@@ -1,0 +1,38 @@
+[
+{
+    "model": "Ims.course",
+    "pk": 2,
+    "fields": {
+        "title": "Разработака на Python",
+        "description": null,
+        "image": ""
+    }
+},
+{
+    "model": "Ims.course",
+    "pk": 3,
+    "fields": {
+        "title": "Разработака на Python",
+        "description": null,
+        "image": ""
+    }
+},
+{
+    "model": "Ims.course",
+    "pk": 4,
+    "fields": {
+        "title": "Разработака на jAVA",
+        "description": null,
+        "image": ""
+    }
+},
+{
+    "model": "Ims.course",
+    "pk": 5,
+    "fields": {
+        "title": "Программирование",
+        "description": null,
+        "image": ""
+    }
+}
+]
