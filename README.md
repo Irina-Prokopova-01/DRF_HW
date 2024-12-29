@@ -1,6 +1,14 @@
-## Cервис 
+## LMS-система
 
 #Описание:
+Созданы приложения:
+
+Ims;
+users. Разработаны модели:
+Ims.Course;
+Ims.Lesson;
+users.User;
+users.Payment. 
 
 # Установка:
 
