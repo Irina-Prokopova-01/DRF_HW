@@ -52,7 +52,7 @@ class Lesson(models.Model):
         help_text="Введите описание урока",
     )
     preview = models.ImageField(
-        upload_to="lms/previews",
+        upload_to="Ims/previews",
         verbose_name="Превью",
         blank=True,
         null=True,

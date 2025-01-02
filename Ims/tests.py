@@ -11,8 +11,8 @@ class LessonTestCase(APITestCase):
     def setUp(self) -> None:
         super().setUp()
 
-        self.user = User.objects.create(email="irina@mail.ru", password="12345")
-        self.course = Course.objects.create(title="Python")
+        self.user = User.objects.create(email="irina@yandex.ru", password="12345")
+        self.course = Course.objects.create(title="Программирование")
         self.lesson = Lesson.objects.create(
             title="Python",
             video="https://irina.youtube.com/",
@@ -32,13 +32,13 @@ class LessonTestCase(APITestCase):
             response.json()["results"],
             [
                 {
-                    "id": 1,
+                    "id": 3,
+                    "course": None,
                     "title": "Python",
-                    "picture": None,
-                    "description": None,
-                    "video": "https://irina.youtube.com/",
-                    "course": 1,
-                    "owner": 1,
+                    "description": "",
+                    "preview": None,
+                    "video": "http://irina@youtube.com",
+                    "owner": 1
                 }
             ],
         )
