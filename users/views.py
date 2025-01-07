@@ -6,7 +6,7 @@ from users.models import Payment, User
 from rest_framework import viewsets, generics
 from users.serializers import PaymentSerializer, UserSerializer, PaymentSessionRetrieveSerializer
 from datetime import date
-from users.services import create_stripe_price, create_stripe_product, create_stripe_session
+from users.services import create_stripe_price, create_stripe_product, create_stripe_session, prepare_data
 
 
 class UserUpdateApiView(generics.UpdateAPIView):
@@ -53,18 +53,17 @@ class PaymentCreateAPIView(generics.CreateAPIView):
     queryset = Payment.objects.all()
 
     def perform_create(self, serializer):
+        type_bd = self.request.data.get("type_bd")
+        prod_id = self.request.data.get("id")
+        payment_obj = prepare_data(prod_id, type_bd)
         payment = serializer.save(user=self.request.user)
-        print(payment.course, payment.lesson)
-        if payment.course is not None:
-            product = create_stripe_product(payment.course.title)
-        elif payment.lesson is not None:
-            product = create_stripe_product(payment.lesson.title)
-
+        product = create_stripe_product(payment_obj.title)
         price = create_stripe_price(product, payment.amount)
         session_id, payment_link = create_stripe_session(price)
         payment.session_id = session_id
-        payment.link = payment.link
+        payment.link = payment_link
         payment.save()
+
 
 
 class PaymentSessionRetrieveAPIView(generics.RetrieveAPIView):

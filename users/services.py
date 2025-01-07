@@ -6,6 +6,18 @@ from Ims.models import Course, Lesson
 stripe.api_key = config.settings.STRIPE_API_KEY
 
 
+def prepare_data(prod_id, type_bd):
+    """Подготовка данных для создания платежа.
+    Возвращает название продукта и объект для привязки в оплате к объекту курса либо урока.
+    """
+    if type_bd == "course":
+        return Course.objects.get(id=prod_id)
+    elif type_bd == "lesson":
+        return Lesson.objects.get(id=prod_id)
+    else:
+        raise Exception("Неверный тип базы данных")
+
+
 def create_stripe_product(obj):
     """Создаем stripe продукт"""
     return stripe.Product.create(name=obj.title)
@@ -17,7 +29,7 @@ def create_stripe_price(obj, amount):
 
     return stripe.Price.create(
         currency="rub",
-        unit_amount=amount * 100,
+        unit_amount=int(amount * 100),
         product_data={"name": obj.get('name')},
     )
 
