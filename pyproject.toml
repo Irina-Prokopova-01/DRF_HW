@@ -19,6 +19,9 @@ ipython = "^8.31.0"
 djangorestframework-simplejwt = "^5.3.1"
 flake8 = "^7.1.1"
 coverage = "^7.6.10"
+drf-yasg = "^1.21.8"
+stripe = "^11.4.1"
+forex-python = "^1.8"
 
 
 [tool.poetry.group.dev.dependencies]

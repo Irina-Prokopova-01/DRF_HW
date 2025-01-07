@@ -38,7 +38,7 @@ class LessonTestCase(APITestCase):
                     "description": "",
                     "preview": None,
                     "video": "http://irina@youtube.com",
-                    "owner": 1
+                    "owner": 1,
                 }
             ],
         )
