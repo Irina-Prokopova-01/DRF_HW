@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.reverse import reverse
+from rest_framework.reverse import reverse_lazy
 from rest_framework.test import APITestCase
 
 from Ims.models import Lesson, Course, Subscription
@@ -45,7 +45,7 @@ class LessonTestCase(APITestCase):
 
     def test_lesson_create(self):
         """Тестируем создание урока"""
-        url = reverse("Ims:lesson-create")
+        url = reverse_lazy("Ims:lesson-create")
         data = {
             "title": "C++",
             "course": self.course.pk,
@@ -70,7 +70,7 @@ class LessonTestCase(APITestCase):
 
     def test_lesson_update(self):
         """Тестируем изменение урока"""
-        url = reverse("Ims:lesson-update", args=(self.lesson.pk,))
+        url = reverse_lazy("Ims:lesson-update", args=(self.lesson.pk,))
         data = {"title": "Python", "video": "https://test.youtube.com/"}
 
         response = self.client.patch(url, data)
@@ -80,7 +80,7 @@ class LessonTestCase(APITestCase):
 
     def test_lesson_detail(self):
         """Тестируем изменение урока"""
-        url = reverse("Ims:lesson-detail", args=(self.lesson.pk,))
+        url = reverse_lazy("Ims:lesson-detail", args=(self.lesson.pk,))
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -89,7 +89,7 @@ class LessonTestCase(APITestCase):
 
     def test_lesson_delete(self):
         """Тестируем изменение урока"""
-        url = reverse("Ims:lesson-delete", args=(self.lesson.pk,))
+        url = reverse_lazy("Ims:lesson-delete", args=(self.lesson.pk,))
 
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -112,7 +112,7 @@ class SubscriptionTestCase(APITestCase):
     def test_subscription_delete(self):
         """Тест создания/отмены подписки."""
         data = {"pk": self.course.id}
-        url = reverse("Ims:subscription")
+        url = reverse_lazy("Ims:subscription")
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), "Подписка была удалена.")
@@ -120,7 +120,7 @@ class SubscriptionTestCase(APITestCase):
     def test_subscription_create(self):
         """Тест создания/отмены подписки."""
         data = {"pk": self.new_course.id}
-        url = reverse("Ims:subscription")
+        url = reverse_lazy("Ims:subscription")
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), "Подписка была создана.")

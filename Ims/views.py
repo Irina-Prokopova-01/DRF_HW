@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
 from Ims.paginators import CustomPagination
+from Ims.tasks import notification
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -18,6 +19,13 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def perform_update(self, serializer):
+        course_updated = serializer.save()
+        course_updated_id = course_updated.id  # получаем id измененного курса
+        course_updated_title = course_updated.title  # получаем название курса
+        notification.delay(course_updated_id, course_updated_title)
+        course_updated.save()
 
     def get_permissions(self):
         if self.action == "create":
