@@ -1,6 +1,17 @@
-from rest_framework.serializers import ModelSerializer
-
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
+import stripe
 from users.models import Payment, User
+
+
+class PaymentSessionRetrieveSerializer(ModelSerializer):
+    status = SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ("status",)
+
+    def get_status(self, obj):
+        return stripe.checkout.Session.retrieve(obj.session_id,)
 
 
 class UserSerializer(ModelSerializer):
