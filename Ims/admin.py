@@ -29,9 +29,10 @@ class LessonAdmin(admin.ModelAdmin):
         "course",
         "owner",
     )
-    list_filter = (
+    list_filter = ("title", "course", "owner")
+    search_fields = (
+        "id",
         "title",
         "course",
-        "owner"
+        "owner",
     )
-    search_fields = ("id", "title", "course", "owner",)

@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
-from Ims.models import Course, Lesson
+from Ims.models import Course, Lesson, Subscription
+from Ims.validators import LessonVideoValidator
 
 
 class CourseSerializer(ModelSerializer):
@@ -22,11 +23,13 @@ class CourseSerializer(ModelSerializer):
 
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = "__all__"
+
 
 class LessonSerializer(ModelSerializer):
     """Сериализатор урока."""
 
+    validators = [LessonVideoValidator(field="video")]
     course = CourseSerializer(read_only=True)
 
     class Meta:
@@ -34,7 +37,9 @@ class LessonSerializer(ModelSerializer):
         fields = "__all__"
 
 
+class SubscriptionSerializer(ModelSerializer):
+    """Сериализатор подписки."""
 
-
-
-
+    class Meta:
+        model = Subscription
+        fields = "__all__"
