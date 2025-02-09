@@ -10,6 +10,7 @@ class IsModerator(permissions.BasePermission):
 
 class IsOwner(permissions.BasePermission):
     """Проверка на принадлежность объекта."""
+
     def has_object_permission(self, request, view, obj):
         if obj.owner == request.user:
             return True

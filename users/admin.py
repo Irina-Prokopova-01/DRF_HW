@@ -11,10 +11,11 @@ class UserAdmin(admin.ModelAdmin):
         "id",
         "email",
     )
-    list_filter = (
+    list_filter = ("email",)
+    search_fields = (
+        "id",
         "email",
     )
-    search_fields = ("id", "email",)
 
 
 @admin.register(Payment)
@@ -39,4 +40,12 @@ class PaymentAdmin(admin.ModelAdmin):
     #     "amount",
     #     "payment_method",
     # )
-    search_fields = ("id", "amount", "user", "date_pay", "course", "lesson", "payment_method",)
+    search_fields = (
+        "id",
+        "amount",
+        "user",
+        "date_pay",
+        "course",
+        "lesson",
+        "payment_method",
+    )

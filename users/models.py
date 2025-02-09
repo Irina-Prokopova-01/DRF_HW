@@ -41,6 +41,7 @@ class User(AbstractUser):
 
 class Payment(models.Model):
     """Модель оплаты"""
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -79,16 +80,10 @@ class Payment(models.Model):
         blank=True,
     )
     session_id = models.CharField(
-        max_length=255,
-        verbose_name="ID сессии",
-        blank=True,
-        null=True
+        max_length=255, verbose_name="ID сессии", blank=True, null=True
     )
     link = models.URLField(
-        max_length=400,
-        verbose_name="Ссылка на оплату",
-        blank=True,
-        null=True
+        max_length=400, verbose_name="Ссылка на оплату", blank=True, null=True
     )
 
     CASH = "наличная оплата"

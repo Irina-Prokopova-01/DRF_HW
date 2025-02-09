@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "users",
     "Ims",
     "django_filters",
-    "django_celery_beat"
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -143,9 +143,11 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
-    'task-name': {
-        'task': 'users.tasks.user_last_login',  # Путь к задаче
-        'schedule': timedelta(minutes=10),  # Расписание выполнения задачи (например, каждые 10 минут)
+    "task-name": {
+        "task": "users.tasks.user_last_login",  # Путь к задаче
+        "schedule": timedelta(
+            minutes=10
+        ),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
 
@@ -166,4 +168,3 @@ if "test" in sys.argv:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
