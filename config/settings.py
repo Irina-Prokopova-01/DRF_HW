@@ -16,10 +16,8 @@ env_file_path = BASE_DIR / '.env'
 load_dotenv(dotenv_path=env_file_path)
 
 
-
 # Путь к файлу .env
 # env_file_path = os.path.join(os.path.dirname(__file__), '.env')
-
 # Проверка существования файла .env
 if not os.path.exists(env_file_path):
     raise FileNotFoundError(f"Файл .env не найден по пути: {env_file_path}")
