@@ -22,7 +22,7 @@ load_dotenv(dotenv_path=env_file_path)
 
 # Проверка существования файла .env
 if not os.path.exists(env_file_path):
-    raise FileNotFoundError(f"Файл .env не найден по пути: {env_file_path}. Пожалуйста, создайте его.")
+    raise FileNotFoundError(f"Файл .env не найден по пути: {env_file_path}")
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
