@@ -31,15 +31,22 @@ jobs:
         image: postgres:latest
         ports:
           - 5432:5432
-        env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+#        env:
+#          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+#          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+#          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+        env:
+            POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+            POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+            SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       - name: Set out Python
         uses: actions/setup-python@v4
