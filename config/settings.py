@@ -7,14 +7,14 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 # Путь к файлу .env
-env_file_path = os.path.join(os.path.dirname(__file__), '.env')
-
-# Проверка существования файла .env
-if not os.path.exists(env_file_path):
-    raise FileNotFoundError(f"Файл .env не найден по пути: {env_file_path}. Пожалуйста, создайте его.")
+# env_file_path = os.path.join(os.path.dirname(__file__), '.env')
+#
+# # Проверка существования файла .env
+# if not os.path.exists(env_file_path):
+#     raise FileNotFoundError(f"Файл .env не найден по пути: {env_file_path}. Пожалуйста, создайте его.")
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
