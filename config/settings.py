@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "users",
     "Ims",
-    # "django_filters",
+    "django_filters",
     "django_celery_beat",
 ]
 
