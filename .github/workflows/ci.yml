@@ -31,6 +31,10 @@ jobs:
         image: postgres:latest
         ports:
           - 5432:5432
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
 
     steps:
       - name: Check out code
@@ -52,6 +56,17 @@ jobs:
         run: |
           pip install poetry
           poetry install --no-interaction --no-root
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          for i in {1..30}; do
+            if pg_isready -h localhost -p 5432 -U ${{ secrets.POSTGRES_USER }}; then
+              echo "PostgreSQL is ready!"
+              break
+            fi
+            echo "Waiting for PostgreSQL..."
+            sleep 1
+          done
 
       - name: Run migrate
         run: poetry run python manage.py migrate
@@ -89,8 +104,9 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/DRF_HW:${{ github.sha }}
+          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
           docker stop DRF_HW || true
           docker rm DRF_HW || true
-          docker run -d --name DRF_HW -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/DRF_HW:${{ github.sha }}
+          docker run -d --name DRF_HW -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
           EOF
+
