@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          python poetry install
+          poetry install
 
       - name: Run migrate
         run: python manage.py migrate
