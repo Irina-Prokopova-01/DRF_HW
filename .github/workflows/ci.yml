@@ -26,11 +26,11 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-          - 5432:5432
+#    services:
+#      postgres:
+#        image: postgres:latest
+#        ports:
+#          - 5432:5432
 
     steps:
       - name: Check out code
