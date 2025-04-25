@@ -23,14 +23,13 @@ def create_stripe_product(obj):
     return stripe.Product.create(name=obj.title)
 
 
-
 def create_stripe_price(obj, amount):
     """Создает цену в страйпе"""
 
     return stripe.Price.create(
         currency="rub",
         unit_amount=int(amount * 100),
-        product_data={"name": obj.get('name')},
+        product_data={"name": obj.get("name")},
     )
 
 

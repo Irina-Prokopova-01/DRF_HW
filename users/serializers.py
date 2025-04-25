@@ -11,7 +11,9 @@ class PaymentSessionRetrieveSerializer(ModelSerializer):
         fields = ("status",)
 
     def get_status(self, obj):
-        return stripe.checkout.Session.retrieve(obj.session_id,)
+        return stripe.checkout.Session.retrieve(
+            obj.session_id,
+        )
 
 
 class UserSerializer(ModelSerializer):

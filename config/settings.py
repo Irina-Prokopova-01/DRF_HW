@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
@@ -8,8 +9,21 @@ load_dotenv(override=True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Путь к файлу .env в BASE_DIR
+env_file_path = BASE_DIR / '.env'
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+# Загрузка переменных окружения из .env файла
+load_dotenv(dotenv_path=env_file_path)
+
+
+# Путь к файлу .env
+# env_file_path = os.path.join(os.path.dirname(__file__), '.env')
+# Проверка существования файла .env
+if not os.path.exists(env_file_path):
+    raise FileNotFoundError(f"Файл .env не найден по пути: {env_file_path}")
+
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
 DEBUG = True
@@ -29,7 +43,7 @@ INSTALLED_APPS = [
     "users",
     "Ims",
     "django_filters",
-    "django_celery_beat"
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -142,9 +156,11 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
-    'task-name': {
-        'task': 'users.tasks.user_last_login',  # Путь к задаче
-        'schedule': timedelta(minutes=10),  # Расписание выполнения задачи (например, каждые 10 минут)
+    "task-name": {
+        "task": "users.tasks.user_last_login",  # Путь к задаче
+        "schedule": timedelta(
+            minutes=10
+        ),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
 
@@ -158,3 +174,10 @@ EMAIL_HOST_PASSWORD = os.getenv("PASSWORD")
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
